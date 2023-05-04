@@ -3,17 +3,27 @@ import { useEffect, useState } from "react";
 
 export default function CupcakeList() {
   const [cupcakes, SetCupcakes] = useState([]);
+  const [accessories, SetAccessories] = useState([]);
 
   // Step 1: get all cupcakes
   useEffect(() => {
     fetch("http://localhost:4000/cupcakes")
-      // fetch(`${import.meta.env.VITE_BACKEND_URL}/actors`)
       .then((res) => res.json())
       .then((data) => SetCupcakes(data))
       .catch((err) => console.error(err));
   }, []);
 
   // Step 3: get all accessories
+  useEffect(() => {
+    fetch("http://localhost:4000/accessories")
+      .then((res) => res.json())
+      .then((data) => SetAccessories(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  // Pour le toutou
+  console.error(accessories);
+
   return (
     <>
       <h1>My cupcakes</h1>
