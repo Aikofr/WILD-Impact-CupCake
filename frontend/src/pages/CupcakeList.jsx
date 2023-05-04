@@ -13,9 +13,6 @@ export default function CupcakeList() {
       .catch((err) => console.error(err));
   }, []);
 
-  // Pour Husky ca
-  console.error(cupcakes);
-
   // Step 3: get all accessories
   return (
     <>
@@ -31,9 +28,11 @@ export default function CupcakeList() {
       </form>
       <ul className="cupcake-list" id="cupcake-list">
         {/* Step 2: repeat this block for each cupcake */}
-        <li className="cupcake-item">
-          <Cupcake />
-        </li>
+        {cupcakes.map((cupcake) => (
+          <li className="cupcake-item">
+            <Cupcake key={cupcake.id} cupcake={cupcake} />
+          </li>
+        ))}
         {/* end of block */}
       </ul>
     </>
