@@ -1,5 +1,6 @@
 import Cupcake from "@components/Cupcake";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function CupcakeList() {
   const [cupcakes, SetCupcakes] = useState([]);
@@ -45,9 +46,11 @@ export default function CupcakeList() {
         {cupcakes
           .filter((cupcake) => cupcake.url === filter || filter === "")
           .map((cupcake) => (
-            <li className="cupcake-item">
-              <Cupcake key={cupcake.id} cupcake={cupcake} />
-            </li>
+            <Link to={`/cupcakes/${cupcake.id}`}>
+              <li className="cupcake-item">
+                <Cupcake key={cupcake.id} cupcake={cupcake} />
+              </li>
+            </Link>
           ))}
       </ul>
     </>
