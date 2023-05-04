@@ -21,9 +21,6 @@ export default function CupcakeList() {
       .catch((err) => console.error(err));
   }, []);
 
-  // Pour le toutou
-  console.error(accessories);
-
   return (
     <>
       <h1>My cupcakes</h1>
@@ -32,18 +29,20 @@ export default function CupcakeList() {
           Filter by{" "}
           <select id="cupcake-select">
             <option value="">---</option>
-            {/* Step 4: add an option for each accessory */}
+            {accessories.map((accessorie) => (
+              <option key={accessorie.id} value={accessorie.id}>
+                {accessorie.name}
+              </option>
+            ))}
           </select>
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {/* Step 2: repeat this block for each cupcake */}
         {cupcakes.map((cupcake) => (
           <li className="cupcake-item">
             <Cupcake key={cupcake.id} cupcake={cupcake} />
           </li>
         ))}
-        {/* end of block */}
       </ul>
     </>
   );
