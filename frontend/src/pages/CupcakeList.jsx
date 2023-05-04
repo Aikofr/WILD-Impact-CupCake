@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export default function CupcakeList() {
   const [cupcakes, SetCupcakes] = useState([]);
   const [accessories, SetAccessories] = useState([]);
+  const [filter, setFilter] = useState("");
 
   // Step 1: get all cupcakes
   useEffect(() => {
@@ -27,10 +28,13 @@ export default function CupcakeList() {
       <form className="center">
         <label htmlFor="cupcake-select">
           Filter by{" "}
-          <select id="cupcake-select">
+          <select
+            id="cupcake-select"
+            onChange={(event) => setFilter(event.target.value)}
+          >
             <option value="">---</option>
             {accessories.map((accessorie) => (
-              <option key={accessorie.id} value={accessorie.id}>
+              <option key={accessorie.id} value={accessorie.url}>
                 {accessorie.name}
               </option>
             ))}
@@ -38,11 +42,13 @@ export default function CupcakeList() {
         </label>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {cupcakes.map((cupcake) => (
-          <li className="cupcake-item">
-            <Cupcake key={cupcake.id} cupcake={cupcake} />
-          </li>
-        ))}
+        {cupcakes
+          .filter((cupcake) => cupcake.url === filter || filter === "")
+          .map((cupcake) => (
+            <li className="cupcake-item">
+              <Cupcake key={cupcake.id} cupcake={cupcake} />
+            </li>
+          ))}
       </ul>
     </>
   );
